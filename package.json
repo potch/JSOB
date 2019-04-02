@@ -1,0 +1,29 @@
+{
+  "name": "jsob",
+  "version": "1.0.0",
+  "description": "JavaScript OBject literal notation",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap -c test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potch/JSOB.git"
+  },
+  "keywords": [
+    "json",
+    "js"
+  ],
+  "author": "Potch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potch/JSOB/issues"
+  },
+  "homepage": "https://github.com/potch/JSOB#readme",
+  "dependencies": {
+    "acorn": "^6.1.1"
+  },
+  "devDependencies": {
+    "tap": "^12.6.1"
+  }
+}
