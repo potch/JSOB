@@ -2,6 +2,8 @@
 
 Like JSON, but a bit less of a pain. Uses an actual JS parser ([acorn](https://github.com/acornjs/acorn)) to read object literal syntax (including comments!), *without* running the code. Only supports JSON-compatible types (numbers, boolean, strings, objects, and arrays). No need to worry about quoting keys and all that junk. If it's valid JS, it should be valid JSOB!
 
+[📦 JSOB package](https://www.npmjs.com/package/jsob)
+
 **This project is not particularly well tested, so maybe don't use it in prod!**
 
 Here's some JSOB:
