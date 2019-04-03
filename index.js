@@ -5,7 +5,7 @@ exports.stringify = function (...args) {
   return JSON.stringify(...args);
 }
 
-exports.parse = function walk(string) {
+exports.parse = function parse(string) {
 
   let ast = acorn.parseExpressionAt(string, 0);
 

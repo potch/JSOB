@@ -10,8 +10,8 @@ Like JSON, but a bit less of a pain. Uses an actual JS parser ([acorn](https://g
 const JSOB = require('JSOB');
 
 JSOB.parse(`{
-  msg: 'hello!'
-  'quotes': "optional but fine!"
+  msg: 'hello!',
+  'quotes': "optional but fine!",
   // this is a comment!! wowww
   'multiline support': \`
     Yup! You can't use tags or substitutions,

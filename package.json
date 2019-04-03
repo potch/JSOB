@@ -1,10 +1,11 @@
 {
   "name": "jsob",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "JavaScript OBject literal notation",
   "main": "index.js",
   "scripts": {
-    "test": "tap -c test/*.js"
+    "test": "tap -c test/*.js",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "acorn": "^6.1.1"
   },
   "devDependencies": {
+    "rollup": "^1.8.0",
+    "rollup-plugin-commonjs": "^9.2.3",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "tap": "^12.6.1"
   }
 }
