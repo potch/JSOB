@@ -5024,35 +5024,45 @@ var JSOB = (function (exports) {
 
   var parse$1 = function parse(string) {
 
-    let ast = acorn$1.parseExpressionAt(string, 0);
+    let ast;
+    try {
+      ast = acorn$1.parseExpressionAt(string, 0);
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        throw new Error(`Syntax error during parsing: ${e.message}`);
+      }
+      throw new Error(`Error during parsing: ${e.message}`);
+    }
 
     if (ast.type !== 'ObjectExpression') {
-      throw new Error('Invalid Outer Type: ' + ast.type);
+      throw new Error('Invalid top-level value: ' + ast.type);
     }
     
     // All valid value types.
-    function walkValue(val) {
+    function walkValue(val, string='') {
       switch (val.type) {
         case 'Literal':
           if (val.regex) {
-            throw new Error('Sorry, no RegExp Support!');
+            throw new Error(`Error at ${string}: Value cannot be a Regular Expression`);
           }
           return val.value;
+        case 'FunctionExpression':
+          throw new Error(`Error at ${string}: Value cannot be a Function`);
         case 'ObjectExpression':
-          return walkObject(val);
+          return walkObject(val, string);
         case 'ArrayExpression':
-          return walkArray(val);
+          return walkArray(val, string);
         case 'TemplateLiteral':
           // use only the first quasi
           return val.quasis[0].value.cooked;
       }
-      throw new Error('Invalid Value Type: ' + val.type);
+      throw new Error(`Error at ${string}: Invalid value of type ${val.type}`);
     }
     
-    function walkObject(obj) {
+    function walkObject(obj, string='') {
       return obj.properties.reduce((o, prop) => {
         if (prop.type !== 'Property') {
-          throw new Error('Invalid Property Type: ' + prop.type);
+          throw new Error(`Error at ${string}: Invalid property type: ${prop.type}`);
         }
         let key;
         if (prop.key.type === 'Identifier') {
@@ -5060,15 +5070,15 @@ var JSOB = (function (exports) {
         } else if (prop.key.type === 'Literal') {
           key = prop.key.value;
         } else {
-          throw new Error('Invalid Key Type: ' + prop.key.type);
+          throw new Error(`Error at ${string}: Invalid key type: ${prop.type}`);
         }
-        o[key] = walkValue(prop.value);
+        o[key] = walkValue(prop.value, string + '.' + key);
         return o;
       }, {});
     }
     
-    function walkArray(arr) {
-      return arr.elements.map(walkValue);
+    function walkArray(arr, string='') {
+      return arr.elements.map((val, i) => walkValue(val, string + '[' + i + ']'));
     }
     
     return walkObject(ast);
