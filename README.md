@@ -1,5 +1,7 @@
 # JSOB - JavaScript OBject literal notation
 
+[![jsob on npm](https://img.shields.io/npm/v/jsob.svg)](https://www.npmjs.com/package/jsob)
+
 Like JSON, but a bit less of a pain. Uses an actual JS parser ([acorn](https://github.com/acornjs/acorn)) to read object literal syntax (including comments!), *without* running the code. Only supports JSON-compatible types (numbers, boolean, strings, objects, and arrays). No need to worry about quoting keys and all that junk. If it's valid JS, it should be valid JSOB!
 
 [📦 JSOB package](https://www.npmjs.com/package/jsob)
